@@ -25,18 +25,21 @@ const StyledButton = styled.button`
   opacity: ${({ isActive }) => (isActive ? "1" : "0.5")};
   border: none;
   font-size: 28px;
-  background-color: transparent;
   margin-right: 20px;
   margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   position: relative;
-  // border-bottom: ${({ isActive }) => (isActive ? "2px solid #000" : "")};
-  // border-bottom-width: ${({ isActive }) => (isActive ? "3px" : "0px")};
+  background-color: ${({ darkmode }) => darkmode ? '#54b629' : '#323332'};
+  border-radius: 10px;
+  color: ${({ darkmode }) => darkmode ? '#efefef' : '#e5e6e9'};
   font-weight: ${({ isActive }) => (isActive ? "bold" : "normal")};
   &:hover {
-    background-color: #2c7a7b;
+    background-color: ${({ darkmode }) => darkmode ? '#3cba9f' : '#2c7a7b'};
     border-radius: 25px;
   }
 `;
+
 
 const ButtonSeparator = styled.div`
   position: absolute;
@@ -177,7 +180,7 @@ const AddCommentButton = styled.button`
 `;
 
 
-export default function Comment({ id_course }) {
+export default function Comment({ id_course ,isdark} ) {
     
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState({
@@ -190,7 +193,6 @@ export default function Comment({ id_course }) {
     const [counterpeople, setCounterpeople] = useState(0);
     const [whobutton, setWhobutton] = useState(false);
     const [idc, setIdc] = useState("");
-
     useEffect(() => {
         fetchComments();
     }, [id_course]);
@@ -264,7 +266,7 @@ export default function Comment({ id_course }) {
     return (
         <>
           {idc === "" ? (
-            <StyledH2>โปรดเลือกวิชา</StyledH2>
+            <StyledContainer><div style={{ minHeight: '100vh' }}>โปรดเลือกวิชา</div></StyledContainer>
           ) : (
             <>
             <StyledListonlybet>
@@ -281,9 +283,9 @@ export default function Comment({ id_course }) {
                   </StyledListonlybet>
             <StyledContainer>
             <ButtonGroup isActive={whobutton}>
-              <StyledButton type="button" onClick={() => seeoradd("see")} isActive={!whobutton}>ดูความคิดเห็น</StyledButton>
+              <StyledButton type="button" onClick={() => seeoradd("see")} isActive={!whobutton} darkmode={isdark}>ดูความคิดเห็น</StyledButton>
               <ButtonSeparator/>
-              <StyledButton type="button" onClick={() => seeoradd("add")} isActive={whobutton}>เพิ่มความคิดเห็น</StyledButton>
+              <StyledButton type="button" onClick={() => seeoradd("add")} isActive={whobutton} darkmode={isdark}>เพิ่มความคิดเห็น</StyledButton>
             </ButtonGroup>
                 {whobutton ? (
                   <>
@@ -313,7 +315,7 @@ export default function Comment({ id_course }) {
                 ) : (
                   <>
                     {comments.length === 0 ? (
-                      <p>No comments</p>
+                      <StyledH2>No comments</StyledH2>
                     ) : (
                       <StyledList>
 

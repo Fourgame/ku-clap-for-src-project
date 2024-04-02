@@ -8,6 +8,17 @@ import four from './4.txt';
 import five from './5.txt';
 import Comment from './addandcomment.js'; // Import the Comment component
 import styled from 'styled-components';
+import Toggle from "react-toggle";
+import "react-toggle/style.css";
+
+const DarkModeToggle = ({ isDark, setIsDark }) => (
+  <Toggle
+    checked={isDark}
+    onChange={() => setIsDark(!isDark)}
+    icons={{ checked: "🌙", unchecked: "🔆" }}
+    aria-label="Dark mode toggle"
+  />
+);
 
 
 const StyledContainer = styled.div`
@@ -15,7 +26,18 @@ const StyledContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: ${({ darkMode }) => darkMode ? '#1f2023' : '#fafafa'};
+  color: ${({ darkMode }) => darkMode ? '#efefef' : '#1f2023'};
 `;
+
+const ButtomRight = styled.div`
+  align-items: left;
+  justify-content: left;
+  display: left;
+  background-color: ${({ darkMode }) => darkMode ? '#1f2023' : '#fafafa'};
+  color: ${({ darkMode }) => darkMode ? '#efefef' : '#1f2023'};
+`;
+
 
 const StyledH1 = styled.h1`
   font-size: 30px;
@@ -79,6 +101,7 @@ const HomePage = () => {
   const [selectedGroupSubject, setSelectedGroupSubject] = useState("");
   const [groupSubjects, setGroupSubjects] = useState([]);
   const [checkstart,setcheckstart]=useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     fetchGroupSubjects();
@@ -96,7 +119,6 @@ const HomePage = () => {
     findIdWhenSelect(selectedCourse);
   }, [selectedCourse]);
 
-  
 
 
   const fetchCourses = async () => {  
@@ -158,42 +180,49 @@ const HomePage = () => {
 
   return (
     <>
+        <ButtomRight darkMode={isDark}>
+        <DarkModeToggle isDark={isDark} setIsDark={setIsDark} />
+      </ButtomRight>
+      <StyledContainer darkMode={isDark}>
         
-        <StyledContainer>
-          <StyledImage src={require('./assets/logo.png')} alt="Logo" />
-          <StyledH1>KU CLAP SRC</StyledH1>
-          <StyledH2>เลือกหมวดหมู่วิชาเสรี</StyledH2>
-          <StyledSelect onChange={handleGroupSubjectSelect} value={selectedGroupSubject}>
+        <StyledImage src={require('./assets/logo.png')} alt="Logo" />
+        <StyledH1>KU CLAP SRC</StyledH1>
+        <StyledH2>เลือกหมวดหมู่วิชาเสรี</StyledH2>
+        <StyledSelect onChange={handleGroupSubjectSelect} value={selectedGroupSubject}>
+          <option value="">-- Please Select --</option>
+          {groupSubjects.map((groupSubject, index) => (
+            <option key={index} value={groupSubject.trim()}>
+              {groupSubject.trim()}
+            </option>
+          ))}
+        </StyledSelect>
+      </StyledContainer>
+      {!checkstart ? (<StyledContainer darkMode={isDark}>
+        <StyledContainer darkMode={isDark}>
+          <div style={{ minHeight: '100vh' }}></div>
+        </StyledContainer>
+      </StyledContainer>) : (
+      <StyledContainer darkMode={isDark}>
+        <StyledH2>เลือกรายวิชา</StyledH2>
+        <StyledSelectContainer>
+          <StyledSelect onChange={handleCourseSelect} value={selectedCourse}>
             <option value="">-- Please Select --</option>
-            {groupSubjects.map((groupSubject, index) => (
-              <option key={index} value={groupSubject.trim()}>
-                {groupSubject.trim()}
+            {courses.map((course, index) => (
+              <option key={index} value={course.trim()}>
+                {course.trim()}
               </option>
             ))}
           </StyledSelect>
-        </StyledContainer>
-        {!checkstart ? (<></>) : (
-        <StyledContainer>
-          <StyledH2>เลือกรายวิชา</StyledH2>
-          <StyledSelectContainer>
-            <StyledSelect onChange={handleCourseSelect} value={selectedCourse}>
-              <option value="">-- Please Select --</option>
-              {courses.map((course, index) => (
-                <option key={index} value={course.trim()}>
-                  {course.trim()}
-                </option>
-              ))}
-            </StyledSelect>
-          </StyledSelectContainer>
-          <StyledSeparator /> 
-          {selectedCourse && <StyledH2>รายละเอียด {selectedCourse}</StyledH2>}
-          <Comment id_course={idd} />
-        </StyledContainer>
-      )}
-    </>
+        </StyledSelectContainer>
+        <StyledSeparator /> 
+        {selectedCourse && <StyledH2>รายละเอียด {selectedCourse}</StyledH2>}
+        <Comment id_course={idd} Darkmode={isDark}/>
+      </StyledContainer>
+    )}
+  </>
   );
-  
-
 };
 
 export default HomePage;
+
+  
