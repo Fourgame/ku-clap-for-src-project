@@ -86,7 +86,7 @@ const CommentTextArea = styled.textarea`
 
 const UserTextArea = styled.textarea`
   width: 70%;
-  height: 15px;
+  height: 19px;
   font-size: 15px;
   padding: 5px;
   border-radius: 10px; /* ปรับขนาดของขอบเส้นมุม */
@@ -274,7 +274,8 @@ export default function Comment({ id_course }) {
                 </StyledH2>
               <LikesBarContainer>
               <LikesBarFiller fillerWidth={TotalLikesPercent}>
-                        <LikesBarContent>{TotalLikesPercent.toFixed(0)} % ฺ</LikesBarContent>
+                        {TotalLikesPercent===0 ? (<></>):(
+                        <LikesBarContent>{TotalLikesPercent.toFixed(0)} % ฺ</LikesBarContent>)}
                       </LikesBarFiller>
                   </LikesBarContainer>
                   </StyledListonlybet>
