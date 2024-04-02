@@ -315,7 +315,7 @@ export default function Comment({ id_course ,isdark} ) {
                 ) : (
                   <>
                     {comments.length === 0 ? (
-                      <StyledH2>No comments</StyledH2>
+                      <StyledH2><div style={{ minHeight: '100vh' }}>ไม่ไม่ความคิดเห็น</div></StyledH2>
                     ) : (
                       <StyledList>
 
