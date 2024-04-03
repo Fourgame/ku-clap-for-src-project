@@ -75,7 +75,7 @@ const CommentLabel = styled.label`
   margin-bottom: 5px;
 `;
 
-const CommentTextArea = styled.textarea`
+const CommentTextArea = styled.textarea` //ช่องใส่ ข้อความสวยจัด 
   width: 20%-95%;
   height: 100px;
   font-size: 20px;
