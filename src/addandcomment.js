@@ -164,7 +164,7 @@ const LikesBarContent = styled.span`
   color: #00000;
 `;
 
-const AddCommentButton = styled.button`
+const AddCommentButton = styled.button`   //(request)ปุ่มสีเขียวหรอดีๆ เหมาะกับม.เรา
   font-size: 20px;
   padding: 10px 20px;
   background-color: #3cba9f;
