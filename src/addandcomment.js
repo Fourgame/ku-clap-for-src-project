@@ -139,7 +139,7 @@ const BoldText = styled.div`
   font-size: 18px;
 `;
 
-const LikesBarContainer = styled.div`
+const LikesBarContainer = styled.div` 
   width: 100%;
   max-width: 500px;
   height: 25px;
@@ -205,7 +205,7 @@ export default function Comment({ id_course ,isdark} ) {
         setIdc(id_course);
     }, [id_course]);
 
-    const fetchComments = () => {
+    const fetchComments = () => {            
         axios.get(`http://localhost:5000/comments/${id_course}`)
             .then(response => setComments(response.data.comments))
             .catch(error => console.error('Error fetching comments:', error));
@@ -228,7 +228,7 @@ export default function Comment({ id_course ,isdark} ) {
     };
     
 
-    const seeoradd = (buttonType) => {
+    const seeoradd = (buttonType) => {       //
         if (buttonType === "see") {
             setWhobutton(false);
         } else if (buttonType === "add") {
@@ -271,7 +271,7 @@ export default function Comment({ id_course ,isdark} ) {
             <>
             <StyledListonlybet>
             
-            <StyledH2>
+            <StyledH2>   //จัดเรียงได้สวยงามตามท้องเรื่อง เป็นuiเข้าใจง่าย
                 คนชื่นชอบ :
                 </StyledH2>
               <LikesBarContainer>
