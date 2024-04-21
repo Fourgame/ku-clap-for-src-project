@@ -315,24 +315,22 @@ export default function Comment({ id_course ,isdark} ) {
                 ) : (
                   <>
                     {comments.length === 0 ? (
-                      <StyledH2><div style={{ minHeight: '100vh' }}>ไม่ไม่ความคิดเห็น</div></StyledH2>
-                    ) : (
-                      <StyledList>
-
-                        <StyledH2 >ความคิดเห็นทั้งหมด {counterpeople} ความคิดเห็น</StyledH2 >
-                          {comments.map(comment => (
-                            
+                        <StyledH2><div style={{ minHeight: '100vh' }}>ไม่มีความคิดเห็น</div></StyledH2>
+                      ) : (
+                        <StyledList>
+                          <StyledH2>ความคิดเห็นทั้งหมด {counterpeople} ความคิดเห็น</StyledH2>
+                          {comments.reverse().map(comment => (
                             <StyledListItem key={comment._id}>
                               <BoldText>{comment.comment}</BoldText>
                               <StyledSeparator/>
                               <StyledListbet>
-                              <UserInfo>โดย {comment.user}</UserInfo>
-                              <UserInfo>ให้คะแนน {comment.like} / 5</UserInfo>
+                                <UserInfo>โดย {comment.user}</UserInfo>
+                                <UserInfo>ให้คะแนน {comment.like} / 5</UserInfo>
                               </StyledListbet>
                             </StyledListItem>
                           ))}
-                      </StyledList>
-                    )}
+                        </StyledList>
+                      )}
                   </>
                 )}
               </StyledContainer>
