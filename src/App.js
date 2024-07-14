@@ -145,10 +145,6 @@ const HomePage = () => {
     } 
   };
 
-  const handleCourseSelect = (event) => {
-    setSelectedCourse(event.target.value);
-  };
-
   const fetchGroupSubjects = async () => {
     try {
       const response = await axios.get(subjectgroup);
@@ -158,6 +154,12 @@ const HomePage = () => {
       console.error('Error fetching group subjects:', error);
     }
   };
+
+  const handleCourseSelect = (event) => {
+    setSelectedCourse(event.target.value);
+  };
+
+  
   
   const handleGroupSubjectSelect = (event) => {
     setcheckstart(true);
